@@ -14,3 +14,11 @@ class Prestamo(PrestamoBase, table=True):
     fecha_vencimiento: date
     fecha_devolucion: date | None = None
     multa: int = 0
+
+
+class PrestamoPublic(PrestamoBase):
+    id: int
+    fecha_prestamo: date
+    fecha_vencimiento: date
+    fecha_devolucion: date | None
+    multa: int

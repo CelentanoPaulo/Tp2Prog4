@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException
 
-from dependencies import SocioServiceDep
+from dependencies import PrestamoServiceDep, SocioServiceDep
+from models.prestamos import PrestamoPublic
 from models.socios import SocioBase, SocioPublic
 
 router = APIRouter(prefix="/socios", tags=["Socios"])
@@ -38,3 +39,12 @@ def actualizar_socio(
 def eliminar_socio(socio_id: int, service: SocioServiceDep):
     if not service.eliminar(socio_id):
         raise HTTPException(status_code=404, detail="Socio no encontrado")
+
+
+@router.get("/{socio_id}/prestamos", response_model=list[PrestamoPublic])
+def listar_prestamos_del_socio(
+    socio_id: int,
+    prestamo_service: PrestamoServiceDep,
+    activos: bool | None = None,
+):
+    return prestamo_service.listar_por_socio(socio_id, activos)
