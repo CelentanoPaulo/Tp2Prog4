@@ -38,3 +38,11 @@ class Libro(LibroBase, table=True):
     autores: list[Autor] = Relationship(
         back_populates="libros", link_model=LibroAutor
     )
+
+
+class LibroPublic(LibroBase):
+    id: int
+
+
+class LibroConAutores(LibroPublic):
+    autores: list[AutorPublic] = []
