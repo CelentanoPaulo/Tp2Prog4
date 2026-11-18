@@ -9,3 +9,7 @@ class SocioBase(SQLModel):
 
 class Socio(SocioBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
+
+
+class SocioPublic(SocioBase):
+    id: int
