@@ -1,10 +1,12 @@
 from fastapi import FastAPI
 
+from models import libros, prestamos, socios  # noqa: F401
 from repositories.database import create_db_and_tables
-
-from models import libros, prestamos, socios 
+from routers import autores
 
 app = FastAPI(title="Sistema de Biblioteca")
+
+app.include_router(autores.router)
 
 
 @app.on_event("startup")

@@ -9,6 +9,7 @@ class LibroAutor(SQLModel, table=True):
         default=None, foreign_key="autor.id", primary_key=True
     )
 
+
 class AutorBase(SQLModel):
     nombre: str = Field(index=True)
     nacionalidad: str
@@ -19,6 +20,11 @@ class Autor(AutorBase, table=True):
     libros: list["Libro"] = Relationship(
         back_populates="autores", link_model=LibroAutor
     )
+
+
+class AutorPublic(AutorBase):
+    id: int
+
 
 class LibroBase(SQLModel):
     titulo: str = Field(index=True)
